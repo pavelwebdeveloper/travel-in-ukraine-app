@@ -13,8 +13,12 @@
 
 <main>
     <div class="jumbotron">
-        <h1>This is Places Of Interest Page</h1>
-        <p>Welcome to templating using EJS</p>
+        <h1>Places Of Interest</h1>
+        <ul>
+    <% placesOfInterest.forEach(function(placeOfInterest) { %>
+        <li><%= placeOfInterest.placeofinterestname %> - <%= placeOfInterest.locationname %></li>
+    <% }); %>
+</ul>
     </div>
 </main>
 

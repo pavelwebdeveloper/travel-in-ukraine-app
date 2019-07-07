@@ -1,0 +1,13 @@
+<form>
+                <fieldset>
+                    <legend>Contact Us</legend>
+                    <label class="top">Full name* <input type="text" name="fname" pattern="[A-Za-z ]{2,}" id="fname" required></label>
+                    <label class="top">Email* <input type="email" name="email" id="email" placeholder="someone@gmail.com" pattern="[A-Za-z0-9.]+@[a-z0-9]+\.[a-z]{2,}$" required></label>
+                    <label class="top">Comments
+                        <textarea name="message" id="message" placeholder="Please, input the additional infromation here"></textarea>
+                    </label>
+                </fieldset>
+
+                <input class="submitBtn" type="submit" value="Contact Us" onclick="resultOfSubmit()">
+
+            </form>

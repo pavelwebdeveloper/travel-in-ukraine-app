@@ -24,4 +24,16 @@
     border: 2px solid white; }
     .jumbotron .lang-logo img {
       max-width: 100%; }
+	  nav.navbar ul li.link {
+		  cursor: pointer;
+	  }
+	section.generalplaceofinterest {
+		display: flex;
+		flex-direction: row;
+		border: 2px solid white;
+		margin: 10px;
+	}
+	img.placeofinterestimage {
+		width: 600px;
+	}
 

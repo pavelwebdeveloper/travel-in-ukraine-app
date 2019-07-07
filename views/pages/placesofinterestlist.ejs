@@ -1,10 +1,7 @@
-<h2>Places of Interest in Ukraine</h2>
+<h2 id="change2">Places of Interest in Ukraine</h2>
 
 
-<ul>
     <% placesOfInterest.forEach(function(placeOfInterest) { %>
-        <li><%= placeOfInterest.placeofinterestname %> - <%= placeOfInterest.locationname %></li>
+        <section class="generalplaceofinterest"><div><img src="<%= placeOfInterest.image %>"class="placeofinterestimage"></div><div><ul><li><b>Name:</b> <%= placeOfInterest.placeofinterestname %></li><li><b>Location:</b> 
+	<%= placeOfInterest.locationname %></li><input type="hidden" name="id" pattern="[0-9]{1,}" id="id" value="<%= placeOfInterest.id %>"><button onclick="getPlaceOfInterestDetails(<%= placeOfInterest.id %>)">Get details</button></div></section>	
     <% }); %>
-</ul>
-
-
