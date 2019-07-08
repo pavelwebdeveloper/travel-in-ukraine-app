@@ -2,6 +2,12 @@
   background: #532F8C;
   color: white;
   padding-bottom: 80px; }
+  .jumbotron legend {
+  color: white;
+  }
+  .jumbotron input, textarea {
+  color: black;
+  }
   .jumbotron .btn-primary {
     background: #845ac7;
     border-color: #845ac7; }
