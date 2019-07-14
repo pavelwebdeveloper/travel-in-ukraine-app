@@ -10,6 +10,8 @@ const connectionString = process.env.DATABASE_URL;
 const { Pool } = require('pg')
 var myParser = require("body-parser");
 const pool = new Pool({connectionString: connectionString});
+const bcrypt = require('bcrypt');
+const saltRounds = 10;
 
 
 app
@@ -20,6 +22,10 @@ app
   // index2 page
   .get('/', (req, res) => res.render('pages/index2'))
   .get('/getcontactform', (req, res) => res.render('pages/contactform'))
+  .get('/getloginform', (req, res) => res.render('pages/loginform'))
+  .get('/getsignupform', (req, res) => res.render('pages/signupform'))
+  .post('/login', logIn)
+  .post('/signup', signUp)
   .post('/contactinfo', saveContactInfo)
   .get('/placesofinterestlist', getPlacesOfInterest)
 	
@@ -29,12 +35,52 @@ app
   .get('/placeofinterestdetails', getPlaceOfInterestDetails)
   .listen(PORT, () => console.log(`Listening on ${ PORT }`))
   
-  function saveContactInfo(req, res){
+  
+  function logIn(req, res) {
+	console.log("Log In Info:");
+	console.log(req.body.jsonstring);
+	var obj = JSON.parse(req.body.jsonstring);
+	console.log(obj);
+	console.log(obj.email);
+	console.log(obj.password);
+  }
+  
+  function signUp(req, res) {
+	console.log("Sign Up Info:");
+	console.log(req.body.jsonstring);
+	var obj = JSON.parse(req.body.jsonstring);
+	console.log(obj);
+	console.log(obj.name);
+	var name = obj.name;
+	console.log(obj.email);
+	console.log(obj.password);
+	var password = obj.password;
+	bcrypt.hash(password, saltRounds, function(err, hash) {
+  pool.query('INSERT INTO users (username, email, password) VALUES ($1, $2, $3)', [obj.name, obj.email, hash], function(err, result) {
+	  
+      if (err) {
+        return console.error('error running query', err);
+      }
+	  
+	  // Log this to the console for debugging purposes.
+    console.log("Back from DB with result of signup:");
+	console.log(result);
+	console.log(`User added with ID: ${result.insertId}`);
+	
+	res.sendStatus(200);
+	
+	//callback(null, result.rows);
+    });
+});
+
+  }
+  
+  function saveContactInfo(req, res, next){
 	  console.log("Inserting info into DB");
-	console.log(req.body);
+	var obj = JSON.parse(req.body.jsonstring2);
 	// This runs the query, and then calls the provided anonymous callback function
 	// with the results.
-  pool.query('INSERT INTO contacts (contactname, contactemail, message) VALUES ($1, $2, $3)', [req.body.fname, req.body.email, req.body.message], function(err, result) {
+  pool.query('INSERT INTO contacts (contactname, contactemail, message) VALUES ($1, $2, $3)', [obj.name, obj.email, obj.message], function(err, result) {
 	  
       if (err) {
         return console.error('error running query', err);
@@ -45,8 +91,9 @@ app
 	console.log(result);
 	console.log(`User added with ID: ${result.insertId}`);
 	//res.status(200).json(placesOfInterest);
+	var name = obj.name;
 	
-	res.render('pages/answer');
+	res.sendStatus(200);
 	
 	//callback(null, result.rows);
     });

@@ -145,6 +145,66 @@ function getPlacesOfInterest() {
 }
 
 
+function getSignUpForm() {
+  var xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+      document.getElementById("change1").innerHTML = this.responseText;
+    }
+  };
+  xhttp.open("GET", "/getsignupform", true);
+  xhttp.send();
+}
+
+function getLogInForm() {
+  var xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+      document.getElementById("change1").innerHTML = this.responseText;
+    }
+  };
+  xhttp.open("GET", "/getloginform", true);
+  xhttp.send();
+}
+
+function logIn() {
+  var xhttp = new XMLHttpRequest();
+  var useremail = document.getElementById("userEmail").value;
+	var userpassword = document.getElementById("userPassword").value;
+	var myobj = { "email":useremail,"password":userpassword };
+var jsonstring = JSON.stringify( myobj );
+var postjson = "jsonstring="+encodeURIComponent( jsonstring );
+  xhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+      document.getElementById("change1").innerHTML = this.responseText;
+    }
+  };
+  xhttp.open("POST", "/login", true);
+  xhttp.setRequestHeader("Content-type", 'application/x-www-form-urlencoded');
+  xhttp.send(postjson);
+}
+
+function signUp() {
+  var xhttp = new XMLHttpRequest();
+  var username = document.getElementById("userName").value;
+  var useremail = document.getElementById("userEmail").value;
+	var userpassword = document.getElementById("userPassword").value;
+	var myobj = { "name":username,"email":useremail,"password":userpassword };
+var jsonstring = JSON.stringify( myobj );
+var postjson = "jsonstring="+encodeURIComponent( jsonstring );
+  xhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+      document.getElementById("change1").innerHTML = "You have successfully signed up as " + username + ". Now you can log in.";
+	  //document.getElementById("successmessage").innerHTML = "You have successfully signed up as " + username + ". Now you can log in.";
+	  
+    }
+  };
+  xhttp.open("POST", "/signup", true);
+  xhttp.setRequestHeader("Content-type", 'application/x-www-form-urlencoded');
+  xhttp.send(postjson);
+}
+
+
 function getPlaceOfInterestDetails(id) {
   var xhttp = new XMLHttpRequest();
   xhttp.onreadystatechange = function() {
@@ -169,23 +229,29 @@ function getContactForm() {
   xhttp.send();
 }
 
+
 function resultOfSubmit() {
 console.log("Hi the form is working");
 var fname = document.getElementById("fname").value;
 var email = document.getElementById("email").value;
 var message = document.getElementById("message").value;
-var values = [fname, email, message];
-console.log(values);
+var myobj = { "name":fname,"email":email,"message":message };
+var jsonstring2 = JSON.stringify( myobj );
+var postjson2 = "jsonstring2="+encodeURIComponent( jsonstring2 );
 var xhttp = new XMLHttpRequest();
   xhttp.onreadystatechange = function() {
     if (this.readyState == 4 && this.status == 200) {
-      document.getElementById("change1").innerHTML = this.responseText;
+      document.getElementById("change1").innerHTML = "<p>Thank you for getting in touch with us</p>";
     }
   };
   xhttp.open("POST", "/contactinfo", true);
-  xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-xhttp.send("fname=" + fname + "&email=" + email + "&message=" + message);
+  xhttp.setRequestHeader("Content-type", 'application/x-www-form-urlencoded');
+  xhttp.send(postjson2);
 }
+
+
+
+
 
 </script>
 <script src="index.js"></script>

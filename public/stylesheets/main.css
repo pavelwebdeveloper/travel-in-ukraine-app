@@ -8,6 +8,11 @@
   .jumbotron input, textarea {
   color: black;
   }
+  .container-fluid {
+	  display: flex;
+	  flex-direction: row;
+	  justify-content: space-between;
+  }
   .jumbotron .btn-primary {
     background: #845ac7;
     border-color: #845ac7; }

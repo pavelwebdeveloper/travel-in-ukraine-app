@@ -50,3 +50,35 @@ WHERE id = 2;
 UPDATE placesofinterest
 SET image = 'images/sofia-kievskaya3.jpg'
 WHERE id = 3;
+
+
+CREATE TABLE users (
+id SERIAL PRIMARY KEY,
+username VARCHAR(100) NOT NULL,
+email VARCHAR(100) NOT NULL,
+password VARCHAR(700) NOT NULL,
+userlevel INT
+);
+
+DROP TABLE users;
+
+
+
+
+function Submit() {
+console.log("Hi the form is working");
+var fname = document.getElementById("fname").value;
+var email = document.getElementById("email").value;
+var message = document.getElementById("message").value;
+var values = [fname, email, message];
+console.log(values);
+var xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+      document.getElementById("change1").innerHTML = this.responseText;
+    }
+  };
+  xhttp.open("POST", "/contactinfo", true);
+  xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+xhttp.send("fname=" + fname + "&email=" + email + "&message=" + message);
+}
