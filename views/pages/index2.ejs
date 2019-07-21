@@ -5,7 +5,7 @@
 <head>
     <% include ../partials/head %>
 </head>
-<body class="container">
+<body class="container" onload="getLogNav()" id="change">
 
 <header>
     <% include ../partials/header2 %>
@@ -133,6 +133,19 @@ company presently operating these routes is Ukrferry.</p>
 </footer>
 
 <script>
+function getLogNav() {
+console.log("getLogNav is working     !!!!!!!!!!!!!!!!!!!!!!!!!!!!          !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+  var xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+      document.getElementById("loginoutmenu").innerHTML = this.responseText;
+    }
+  };
+  xhttp.open("GET", "/getloginoutmenu", true);
+  xhttp.send();
+}
+
+
 function getPlacesOfInterest() {
   var xhttp = new XMLHttpRequest();
   xhttp.onreadystatechange = function() {
@@ -176,13 +189,91 @@ var jsonstring = JSON.stringify( myobj );
 var postjson = "jsonstring="+encodeURIComponent( jsonstring );
   xhttp.onreadystatechange = function() {
     if (this.readyState == 4 && this.status == 200) {
-      document.getElementById("change1").innerHTML = this.responseText;
+      document.getElementById("change").innerHTML = this.responseText;
+	  getLogNav();
     }
   };
   xhttp.open("POST", "/login", true);
   xhttp.setRequestHeader("Content-type", 'application/x-www-form-urlencoded');
   xhttp.send(postjson);
 }
+
+
+function logOut() {
+console.log("logOut is working     !!!!!!!!!!!!!!!!!!!!!!!!!!!!          !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+  var xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+      document.getElementById("change").innerHTML = this.responseText;
+	  getLogNav();
+    }
+  };
+  xhttp.open("GET", "/logout", true);
+  xhttp.send();
+}
+
+
+function manageAccount(){
+var xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+      document.getElementById("change1").innerHTML = this.responseText;
+    }
+  };
+  xhttp.open("GET", "/manageaccount", true);
+  xhttp.send();
+}
+
+function getManageAccountForm(){
+var xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+      document.getElementById("change1").innerHTML = this.responseText;
+    }
+  };
+  xhttp.open("GET", "/getmanageaccountform", true);
+  xhttp.send();
+}
+
+function updateAccount(){
+console.log("update is working in AJAX");
+var xhttp = new XMLHttpRequest();
+var username = document.getElementById("userName").value;
+  var useremail = document.getElementById("userEmail").value;
+	var myobj = { "name":username,"email":useremail };
+var jsonstring = JSON.stringify( myobj );
+var postjson = "jsonstring="+encodeURIComponent( jsonstring );
+  xhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+      document.getElementById("change1").innerHTML = this.responseText;
+    }
+  };
+  xhttp.open("POST", "/updateaccountinfo", true);
+  xhttp.setRequestHeader("Content-type", 'application/x-www-form-urlencoded');
+  xhttp.send(postjson);
+}
+
+/*
+function signUp() {
+  var xhttp = new XMLHttpRequest();
+  var username = document.getElementById("userName").value;
+  var useremail = document.getElementById("userEmail").value;
+	var userpassword = document.getElementById("userPassword").value;
+	var myobj = { "name":username,"email":useremail,"password":userpassword };
+var jsonstring = JSON.stringify( myobj );
+var postjson = "jsonstring="+encodeURIComponent( jsonstring );
+  xhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+      document.getElementById("change").innerHTML = this.responseText;
+	  //document.getElementById("successmessage").innerHTML = "You have successfully signed up as " + username + ". Now you can log in.";
+	  
+    }
+  };
+  xhttp.open("POST", "/signup", true);
+  xhttp.setRequestHeader("Content-type", 'application/x-www-form-urlencoded');
+  xhttp.send(postjson);
+}
+*/
 
 function signUp() {
   var xhttp = new XMLHttpRequest();
@@ -194,7 +285,7 @@ var jsonstring = JSON.stringify( myobj );
 var postjson = "jsonstring="+encodeURIComponent( jsonstring );
   xhttp.onreadystatechange = function() {
     if (this.readyState == 4 && this.status == 200) {
-      document.getElementById("change1").innerHTML = "You have successfully signed up as " + username + ". Now you can log in.";
+      document.getElementById("change1").innerHTML = this.responseText;;
 	  //document.getElementById("successmessage").innerHTML = "You have successfully signed up as " + username + ". Now you can log in.";
 	  
     }

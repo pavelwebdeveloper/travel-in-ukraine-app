@@ -60,7 +60,12 @@ password VARCHAR(700) NOT NULL,
 userlevel INT
 );
 
+UPDATE users
+SET email = 'birt@ukr.net'
+WHERE id = 7;
+
 DROP TABLE users;
+
 
 
 
@@ -82,3 +87,22 @@ var xhttp = new XMLHttpRequest();
   xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 xhttp.send("fname=" + fname + "&email=" + email + "&message=" + message);
 }
+
+
+
+bcrypt.compare(password, hashForCompare, function(err, res) {
+	if (res == true) {
+	console.log("Result of comparing the passwords:");
+	console.log(res);
+	loggedin = true;
+	req.session.user = result.rows[0].username;
+	console.log("Session info:");
+	console.log(req.session);
+	console.log("Session user info:");
+	console.log(req.session.user);
+	} else {
+		console.log(res);
+	}
+	
+	
+})
