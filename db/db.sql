@@ -66,7 +66,7 @@ WHERE id = 7;
 
 DROP TABLE users;
 
-
+SELECT * FROM users;
 
 
 

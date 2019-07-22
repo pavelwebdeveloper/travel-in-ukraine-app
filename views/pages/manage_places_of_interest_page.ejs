@@ -1,0 +1,9 @@
+<h2 id="change2">Manage Places of Interest in Ukraine</h2>
+
+<a onclick="addPlaceOfInterest()">Add Place of Interest</a>
+
+<ul>
+    <% placesOfInterest.forEach(function(placeOfInterest) { %>
+        <li><%= placeOfInterest.placeofinterestname %><a onclick="updatePlaceOfInterest()">  Update  </a><a onclick="deletePlaceOfInterest()">  Delete  </a></li>
+    <% }); %>
+</ul>
