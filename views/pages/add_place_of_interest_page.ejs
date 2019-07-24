@@ -1,29 +1,30 @@
+<h2>You can add a new place of interest here</h2>
+
+
 <form>
     <fieldset>
      
-     <label>Place of Interest Name</label>
-     <input type="text" name="placeOfInterestName" id="placeOfInterestName" pattern="[A-za-z\s]{3,}" required>
-     <label>Place of Interest Description</label>
-     <textarea name="placeOfInterestDescription" id="placeOfInterestDescription" rows="10" cols="43" placeholder="Please, describe the new place of interest." required></textarea>
-     <label>Place of Interest Image (path to image)</label>
-     <input type="text" name="placeOfInterestImage" id="placeOfInterestImage" pattern="[a-z-.\/]{3,}" required>
-     <label>Place of Interest Location Name</label>
-     <input type="text" name="placeOfInterestLocationName" id="Place of Interest" required>
-     <label>Product locationid</label>
-     <input type="number" name="invStock" id="invStock" <?php if(isset($invStock)){echo "value='$invStock'";} ?> required>
-     <label class="number">Product Size</label>
-     <input type="number" name="invSize" id="invSize" <?php if(isset($invSize)){echo "value='$invSize'";} ?> required>
-     <label class="number">Product Weight</label>
-     <input type="number" name="invWeight" id="invWeight" <?php if(isset($invWeight)){echo "value='$invWeight'";} ?> required>
-     <label>Product Location</label>
-     <input type="text" name="invLocation" id="invLocation" pattern="[A-Za-z-\s]{3,}" <?php if(empty($checkinvLocation)){echo "value=''";} else {echo "value='$invLocation'";} ?> required>
-     <label>Product Vendor</label>
-     <input type="text" name="invVendor" id="invVendor" pattern="[A-Za-z-\s]{3,}" <?php if(empty($checkinvVendor)){echo "value=''";} else {echo "value='$invVendor'";} ?> required>
-     <label>Product Style</label>
-     <input type="text" name="invStyle" id="invStyle" pattern="[A-Za-z]{3,}" <?php if(empty($checkinvStyle)){echo "value=''";} else {echo "value='$invStyle'";} ?> required>
-     <input class="submitBtn" type="submit" value="Add Product">
-     <!-- Add the action name - value pair -->
-     <input type="hidden" name="action" value="newproduct">
+     <label>Name</label><br>
+     <input type="text" name="placeOfInterestName" id="placeOfInterestName" pattern="[A-za-z\s]{3,}" required><br>
+     <label>Description</label><br>
+     <textarea name="placeOfInterestDescription" id="placeOfInterestDescription" rows="10" cols="43" placeholder="Please, describe the new place of interest." required></textarea><br>
+     <label>Location Name</label><br>
+     <input type="text" name="placeOfInterestLocationName" id="placeOfInterestLocationName" required><br>
+     <label>Locationid</label><br>
+     <input type="number" name="placeOfInterestLocationId" id="placeOfInterestLocationId" required><br>
+     <label class="number">Price for Visit</label><br>
+     <input type="number" name="placeOfInterestPriceForVisit" id="placeOfInterestPriceForVisit" required><br>
+     <label>Location Map</label><br>
+     <input type="text" name="placeOfInterestLocationMap" id="placeOfInterestLocationMap" required><br>
+     <label>Open Hours</label><br>
+     <input type="text" name="placeOfInterestOpenHours" id="placeOfInterestOpenHours" pattern="[A-Za-z-\s]{3,}" required><br>
+     <label>Phone Number</label><br>
+     <input type="number" name="placeOfInterestPhoneNumber" id="placeOfInterestPhoneNumber" pattern="[A-Za-z-\s]{3,}" required><br>
+     <label>Website</label><br>
+     <input type="text" name="placeOfInterestWebsite" id="placeOfInterestWebsite" pattern="[A-Za-z]{3,}" required><br>
+	 <label>Image (path to image)</label><br>
+     <input type="text" name="placeOfInterestImage" id="placeOfInterestImage" pattern="[a-z-.\/]{3,}" required><br><br>
+     <button class="submitBtn" onclick="addPlaceOfInterest()">Add Place of Interest</button><br>
     </fieldset>
     
 

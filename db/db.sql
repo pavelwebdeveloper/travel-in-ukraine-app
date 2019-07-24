@@ -24,10 +24,15 @@ contactemail VARCHAR(100) NOT NULL,
 message VARCHAR(700) NOT NULL
 );
 
+SELECT * FROM placesofinterest;
+
+SELECT * FROM locations;
+
 INSERT INTO contacts (contactname, contactemail, message) VALUES ('Kiev', 2900000);
 
 
 INSERT INTO locations (locationname, population) VALUES ('Kiev', 2900000);
+INSERT INTO locations (locationname, population) VALUES ('Kamianets-Podilskyi', 101000);
 
 DROP TABLE placesofinterest;
 
@@ -40,7 +45,7 @@ ALTER TABLE placesofinterest
 ADD image varchar(150);
 
 ALTER TABLE placesofinterest
-ALTER COLUMN placeofinterestdescription TYPE varchar(950);
+ALTER COLUMN placeofinterestdescription TYPE varchar(1150);
 
 
 UPDATE placesofinterest
@@ -68,7 +73,11 @@ DROP TABLE users;
 
 SELECT * FROM users;
 
+DELETE FROM users WHERE id BETWEEN 13 AND 25;
 
+UPDATE users
+SET userlevel = 3
+WHERE id = 2;
 
 function Submit() {
 console.log("Hi the form is working");

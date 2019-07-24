@@ -1,0 +1,16 @@
+<h2>You are about to delete <%= name %> Place of Interest. The delete is permament and cannot be undone. Are you sure you want to delete <%= name %> Place of Interest?</h2>
+
+
+<form>
+    <fieldset>
+     
+     <label>Name</label><br>
+     <input type="text" name="placeOfInterestName" id="placeOfInterestName" pattern="[A-za-z\s]{3,}" value="<%= name %>" required><br>
+     <label>Description</label><br>
+     <textarea name="placeOfInterestDescription" id="placeOfInterestDescription" rows="10" cols="43" placeholder="Please, describe the new place of interest." required><%= description %></textarea><br>
+	 <input type="hidden" name="placeOfInterestId" id="placeOfInterestId" value="<%= id %>" required><br><br>
+     <button class="submitBtn" onclick="deletePlaceOfInterest(<%= id %>)">Delete</button><br>
+    </fieldset>
+    
+
+   </form>

@@ -1,0 +1,32 @@
+<h2>You can update <%= name %> Place of Interest here</h2>
+
+
+<form>
+    <fieldset>
+     
+     <label>Name</label><br>
+     <input type="text" name="placeOfInterestName" id="placeOfInterestName" pattern="[A-za-z\s]{3,}" value="<%= name %>" required><br>
+     <label>Description</label><br>
+     <textarea name="placeOfInterestDescription" id="placeOfInterestDescription" rows="10" cols="43" placeholder="Please, describe the new place of interest." required><%= description %></textarea><br>
+     <label>Location Name</label><br>
+     <input type="text" name="placeOfInterestLocationName" id="placeOfInterestLocationName" value="<%= locationname %>" required><br>
+     <label>Locationid</label><br>
+     <input type="number" name="placeOfInterestLocationId" id="placeOfInterestLocationId" value="<%= locationid %>" required><br>
+     <label class="number">Price for Visit</label><br>
+     <input type="number" name="placeOfInterestPriceForVisit" id="placeOfInterestPriceForVisit" value="<%= price %>" required><br>
+     <label>Location Map</label><br>
+     <input type="text" name="placeOfInterestLocationMap" id="placeOfInterestLocationMap" value="<%= locationmap %>" required><br>
+     <label>Open Hours</label><br>
+     <input type="text" name="placeOfInterestOpenHours" id="placeOfInterestOpenHours" pattern="[A-Za-z-\s]{3,}" value="<%= openhours %>" required><br>
+     <label>Phone Number</label><br>
+     <input type="number" name="placeOfInterestPhoneNumber" id="placeOfInterestPhoneNumber" pattern="[A-Za-z-\s]{3,}" value="<%= phonenumber %>" required><br>
+     <label>Website</label><br>
+     <input type="text" name="placeOfInterestWebsite" id="placeOfInterestWebsite" pattern="[A-Za-z]{3,}" value="<%= website %>" required><br>
+	 <label>Image (path to image)</label><br>
+     <input type="text" name="placeOfInterestImage" id="placeOfInterestImage" pattern="[a-z-.\/]{3,}" value="<%= image %>" required><br><br>
+	 <input type="hidden" name="placeOfInterestId" id="placeOfInterestId" value="<%= id %>" required><br><br>
+     <button class="submitBtn" onclick="updatePlaceOfInterest()">Add Place of Interest</button><br>
+    </fieldset>
+    
+
+   </form>
