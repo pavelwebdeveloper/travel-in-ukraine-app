@@ -4,7 +4,7 @@
 require('dotenv').config();
 const express = require('express')
 const path = require('path')
-const PORT = process.env.PORT || 5000
+const PORT = process.env.PORT || 8080
 const app = express();
 const connectionString = process.env.DATABASE_URL;
 const { Pool } = require('pg')
@@ -28,7 +28,7 @@ app
   .set('view engine', 'ejs')
   // index2 page
   .get('/', (req, res) => res.render('pages/index2'))
-  .get('/getcontactform', (req, res) => res.render('pages/contactform'))
+  .get('/getcontactform', getContactForm)
   .get('/getloginform', getLogInForm)
   .get('/getloginoutmenu', getLogInOutMenu)
   .get('/getsignupform', getSignUpForm)
@@ -38,7 +38,7 @@ app
   .post('/signup', signUp)
   .get('/placesofinterestlist', getPlacesOfInterest)
   .get('/manageaccount', manageAccount)
-  .post('/updateaccountinfo', updateAccountInfo)
+  .put('/updateaccountinfo', updateAccountInfo)
   .post('/updatepassword', updatePassword)
   .get('/getmanageaccountform', getManageAccountForm)
   .post('/contactinfo', saveContactInfo)
@@ -54,6 +54,13 @@ app
   .get('/placesofinterest', getPlacesOfInterest)
   .get('/placeofinterestdetails', getPlaceOfInterestDetails)
   .listen(PORT, () => console.log(`Listening on ${ PORT }`))
+  
+  function getContactForm(req, res){
+	  var infomessage = "";
+	res.render('pages/contactform', {
+		infomessage: infomessage
+		});  
+  }
   
   function getManagePlacesOfInterestPage(req, res) {
 	  var infomessage = "";
@@ -350,7 +357,7 @@ res.render('pages/manage_places_of_interest_page', {
 	//res.sendStatus(200);
 	
 	
-	if(result.rowCount){
+	if(result.rowCount === 1){
 		infomessage = "You have successfully signed up as " + obj.name + ". Now you can log in.";
 	} else {
 		infomessage = "Sorry. Signing up has failed. Please, try again.";
@@ -423,9 +430,15 @@ res.render('pages/manage_places_of_interest_page', {
 		console.log("Result of comparing the passwords:");
 	console.log(res);
 	loggedin = true;
+	req.session.userid = result.rows[0].id;
 	req.session.user = result.rows[0].username;
 	req.session.email = result.rows[0].email;
 	req.session.userlevel = result.rows[0].userlevel;
+	console.log("INFO FOR THE SESSION !!!!!!!!!!!!!!!");
+	console.log(result.rows[0].id);
+	console.log(result.rows[0].username);
+	console.log(result.rows[0].email);
+	console.log(result.rows[0].userlevel);
 	console.log("Session info:");
 	console.log(req.session);
 	console.log("Session user info:");
@@ -444,15 +457,18 @@ function logOut(req, res) {
 }
 
 function manageAccount(req, res){
+	var userid = req.session.userid;
 	var name = req.session.user;
 	var email = req.session.email;
 	var userlevel = req.session.userlevel;
 	var updateaccountresult = "";
-	pool.query('SELECT * FROM users WHERE email = $1',  [email], function(err, result) {
+	pool.query('SELECT * FROM users WHERE id = $1',  [userid], function(err, result) {
 		if (err) {
         return console.error('error running select query', err);
       }
 		console.log("Result from ---------------------------------------------------DB");
+		console.log(result);
+		console.log(result.rowCount);
 		console.log(result.rows);
 		name = result.rows[0].username;
 		email = result.rows[0].email;
@@ -474,15 +490,18 @@ function manageAccount(req, res){
 }
 
 function getManageAccountForm(req, res){
+	var userid = req.session.userid;
 	var name = req.session.user;
 	var email = req.session.email;
-	pool.query('SELECT * FROM users WHERE email = $1',  [email], function(err, result) {
+	pool.query('SELECT * FROM users WHERE id = $1',  [userid], function(err, result) {
 		if (err) {
         return console.error('error running select query', err);
       }
 		console.log("Result from ---------------------------------------------------DB");
 		console.log(result.rows[0].id);
 		var id = result.rows[0].id;
+		name = result.rows[0].username;
+		email = result.rows[0].email;
 		
 		res.render("pages/manage_account_page", {
         name: name,
@@ -510,34 +529,42 @@ function updateAccountInfo(req, res){
 	pool.query('UPDATE users SET username = $1, email = $2 WHERE id = $3', [obj.name, obj.email, obj.userid], function(err, result) {
 	console.log("Result from DB with ");
 	console.log(result);
+	if (err) {
+        return console.error('error running query', err);
+      }
 	if(result.rowCount === 0){
 		var updateaccountresult = "Sorry, update has failed. Please, try again";
 		res.render("pages/manageaccount");
-	}
-
-	
-	  
-      if (err) {
-        return console.error('error running query', err);
-      }
-});
-
+	} 
 pool.query('SELECT * FROM users WHERE id = $1',  [obj.userid], function(err, result) {
 		if (err) {
         return console.error('error running select query', err);
       }
 		var updateaccountresult = "Your account information has been successfully updated";
+		console.log("Your account information has been successfully updated");
 		var name = result.rows[0].username;
 var email = result.rows[0].email;
 req.session.user = name;
 req.session.email = email;
-		
-		res.render("pages/manageaccount", {
+console.log(result.rows[0].username);
+console.log(result.rows[0].email);
+console.log(name);
+console.log(email);
+console.log(req.session.user);
+console.log(req.session.email);
+res.render("pages/manageaccount", {
         name: name,
 		email: email,
 		updateaccountresult: updateaccountresult
     });
+console.log(result.rowCount);
+		
+		
+	
+});	
 });
+
+
 }
  
 function updatePassword(req, res){
@@ -581,10 +608,21 @@ req.session.email = email;
 }
  
   function saveContactInfo(req, res, next){
+	  var infomessage = "";
 	  console.log("Inserting info into DB");
 	var obj = JSON.parse(req.body.jsonstring2);
 	// This runs the query, and then calls the provided anonymous callback function
 	// with the results.
+	console.log(obj.name);
+	console.log(obj.email);
+	console.log(obj.message);
+	if(obj.name === "" || obj.email === "" || obj.message === "") {
+		console.log("Please, provide all the required information.");
+	infomessage = "Please, provide all the required information.";
+		res.render('pages/contactform', {
+        infomessage: infomessage
+    });	
+	} else {
   pool.query('INSERT INTO contacts (contactname, contactemail, message) VALUES ($1, $2, $3)', [obj.name, obj.email, obj.message], function(err, result) {
 	  
       if (err) {
@@ -595,13 +633,17 @@ req.session.email = email;
     console.log("Back from DB with result:");
 	console.log(result);
 	console.log(`User added with ID: ${result.insertId}`);
-	//res.status(200).json(placesOfInterest);
-	var name = obj.name;
-	
-	res.sendStatus(200);
-	
-	//callback(null, result.rows);
+	console.log(result.rowCount);
+	if(result.rowCount === 1){
+		infomessage = "Thank you for getting in touch with us";		
+	} else {
+		infomessage = "Sorry, something went wrong. Please, try again.";
+	}
+	res.render("pages/answer", {
+		infomessage: infomessage
+		});
     });
+	}
   }
   
   function getPlacesOfInterest(req, res){

@@ -55,7 +55,7 @@
 	<br>
 	<p>At 603,628 square kilometres (233,062 sq mi) and with a coastline of 2,782 kilometres (1,729 mi), Ukraine is the world's 46th-largest country 
 	(after South Sudan and before Madagascar). It is the largest wholly European country and the second-largest country in Europe (after the European part of 
-	Russia, before metropolitan France).[e][36] It lies between latitudes 44° and 53° N, and longitudes 22° and 41° E.
+	Russia, before metropolitan France). It lies between latitudes 44° and 53° N, and longitudes 22° and 41° E.
 
 The landscape of Ukraine consists mostly of fertile plains (or steppes) and plateaus, crossed by rivers such as the Dnieper (Dnipro), Seversky Donets, 
 Dniester and the Southern Bug as they flow south into the Black Sea and the smaller Sea of Azov. To the southwest, the delta of the Danube forms the border with 
@@ -265,10 +265,9 @@ var postjson = "jsonstring="+encodeURIComponent( jsonstring );
   xhttp.onreadystatechange = function() {
     if (this.readyState == 4 && this.status == 200) {
       document.getElementById("change1").innerHTML = this.responseText;
-	  getLogNav();
     }
   };
-  xhttp.open("POST", "/updateaccountinfo", true);
+  xhttp.open("PUT", "/updateaccountinfo", true);
   xhttp.setRequestHeader("Content-type", 'application/x-www-form-urlencoded');
   xhttp.send(postjson);
 }
@@ -443,7 +442,7 @@ var postjson2 = "jsonstring2="+encodeURIComponent( jsonstring2 );
 var xhttp = new XMLHttpRequest();
   xhttp.onreadystatechange = function() {
     if (this.readyState == 4 && this.status == 200) {
-      document.getElementById("change1").innerHTML = "<p>Thank you for getting in touch with us</p>";
+      document.getElementById("change1").innerHTML = this.responseText;
     }
   };
   xhttp.open("POST", "/contactinfo", true);
