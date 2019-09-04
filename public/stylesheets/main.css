@@ -1,4 +1,6 @@
-a:hover {
+
+@media only screen and (min-width: 64em) {
+	a:hover {
 cursor: pointer;
 color: white;	
 }
@@ -7,9 +9,11 @@ button {
 	color: black;
 }
 .jumbotron {
-  background: #532F8C;
-  color: white;
-  padding-bottom: 80px; }
+  /*background: #532F8C;*/
+  /*color: white;*/
+  padding-bottom: 80px; 
+  }
+  
   .jumbotron legend {
   color: white;
   }
@@ -21,15 +25,24 @@ button {
 	  flex-direction: row;
 	  justify-content: space-between;
   }
+  
+  nav.navbar .navbar-default {
+	  display: flex;
+	  flex-direction: row;
+	  justify-content: space-between;
+  }
+  
   .jumbotron .btn-primary {
     background: #845ac7;
     border-color: #845ac7; }
     .jumbotron .btn-primary:hover {
       background: #7646c1; }
   .jumbotron p {
-    color: #d9ccee;
-    max-width: 75%;
-    margin: 1em auto 2em; }
+    /*color: #d9ccee;*/
+    /*max-width: 75%;*/
+    margin: 1em auto 2em;
+	text-align: justify;	
+}
   .navbar + .jumbotron {
     margin-top: -20px; }
   .jumbotron .lang-logo {
@@ -55,4 +68,37 @@ button {
 	img.placeofinterestimage {
 		width: 600px;
 	}
+}
 
+@media only screen and (max-width: 40em) {
+	
+	img{
+		max-width: 100%;
+		max-height: auto;
+	}
+	
+	img.map-image {
+		max-width: 230px;
+		max-height: 170px;
+	}
+	
+	nav.navbar .navbar-default {
+	  flex-direction: column;
+	  justify-content: space-between;
+  }
+  
+  .container-fluid {
+	  flex-direction: column;
+	  justify-content: space-between;
+	  margin-left: 20px;
+  }
+  
+	.navbar-brand {
+	  width: 100%;
+  }
+  
+  .jumbotron p {
+	  font-size: 16px;
+	  text-align: justify;
+  }
+}
