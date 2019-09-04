@@ -64,13 +64,19 @@ button {
 		flex-direction: row;
 		border: 2px solid white;
 		margin: 10px;
+		padding: 10px;
 	}
 	img.placeofinterestimage {
 		width: 600px;
 	}
+	
 }
 
 @media only screen and (max-width: 40em) {
+	
+	div.placeofinterestdetails {
+		overflow: hidden;
+	}
 	
 	img{
 		max-width: 100%;
