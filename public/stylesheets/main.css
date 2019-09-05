@@ -8,6 +8,20 @@ color: white;
 button {
 	color: black;
 }
+
+.loggedinmessage {
+	color: green;
+}
+
+.manageaccountlist {
+		list-style-type: none;
+		padding-left: 0px
+	}
+
+.list {
+	list-style-type: none;
+}
+
 .jumbotron {
   /*background: #532F8C;*/
   /*color: white;*/
@@ -15,7 +29,7 @@ button {
   }
   
   .jumbotron legend {
-  color: white;
+  color: black;
   }
   .jumbotron input, textarea {
   color: black;
@@ -73,6 +87,19 @@ button {
 }
 
 @media only screen and (max-width: 40em) {
+	
+	.loggedinmessage {
+	color: green;
+}
+	
+	.manageaccountlist {
+		list-style-type: none;
+		margin-left: 0px
+	}
+	
+	.list {
+	list-style-type: none;
+}
 	
 	div.placeofinterestdetails {
 		overflow: hidden;

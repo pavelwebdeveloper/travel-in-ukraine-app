@@ -2,6 +2,6 @@
 
 
     <% placesOfInterest.forEach(function(placeOfInterest) { %>
-        <section class="generalplaceofinterest"><div><img src="<%= placeOfInterest.image %>"class="placeofinterestimage"></div><div><ul><li><b>Name:</b> <%= placeOfInterest.placeofinterestname %></li><li><b>Location:</b> 
+        <section class="generalplaceofinterest"><div><img src="<%= placeOfInterest.image %>"class="placeofinterestimage"></div><div><ul class="list"><li><b>Name:</b> <%= placeOfInterest.placeofinterestname %></li><li><b>Location:</b> 
 	<%= placeOfInterest.locationname %></li><input type="hidden" name="id" pattern="[0-9]{1,}" id="id" value="<%= placeOfInterest.id %>"><button onclick="getPlaceOfInterestDetails(<%= placeOfInterest.id %>)">Get details</button></div></section>	
     <% }); %>
