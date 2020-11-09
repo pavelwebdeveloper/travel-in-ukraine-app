@@ -77,7 +77,7 @@ DELETE FROM users WHERE id BETWEEN 13 AND 25;
 
 UPDATE users
 SET userlevel = 3
-WHERE id = 2;
+WHERE id = 1;
 
 function Submit() {
 console.log("Hi the form is working");
