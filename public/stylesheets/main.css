@@ -1,4 +1,25 @@
 
+.main-page-image{
+	max-width: 100%;
+}
+
+.main-page-flex-div{
+		margin: 1em;
+	}
+	
+#landpage-heading{
+	position: absolute;
+	margin-top: 2em;
+	margin-left: 2em;
+	color: white;
+  text-shadow: 1px 1px 2px black, 0 0 25px blue, 0 0 5px darkblue;
+  font-family: 'Bad Script', cursive;
+  font-family: 'Kaushan Script', cursive;
+  font-family: 'Pacifico', cursive;
+  font-family: 'Pinyon Script', cursive;
+}
+
+
 @media only screen and (min-width: 64em) {
 	a:hover {
 cursor: pointer;
@@ -84,9 +105,28 @@ button {
 		width: 600px;
 	}
 	
+	.main-page-flex-div{
+		display: flex;
+		flex-direction: row;
+		justify-content: space-around;
+		margin: 1em;
+	}
+	
+	.main-page-flex-left-div{
+		width: 60%;
+	}
+	
+	.main-page-flex-right-div{
+		width: 40%;
+		margin-left: 5em;
+	}
 }
 
 @media only screen and (max-width: 40em) {
+	
+	.main-page-flex-div{
+		flex-direction: column;
+	}
 	
 	.loggedinmessage {
 	color: green;
