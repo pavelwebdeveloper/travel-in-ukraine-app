@@ -1,11 +1,11 @@
 <!-- views/partials/header2.ejs -->
 
 <nav class="navbar navbar-default" role="navigation">
-
+	<div id="flex-menu">
 	<div>
 		<a class="navbar-brand" href="#">
 		<span class="glyphicon glyphicon glyphicon-tree-deciduous"></span>
-		Travel in Ukraine
+		French Riviera
 		</a>
 	</div>
 	
@@ -13,17 +13,26 @@
 
 		<div class="navbar-header">	
 			<ul class="nav navbar-nav">
-				<li><a href="/">Home</a></li>
-				<li><a style="cursor:pointer" onclick="getPlacesOfInterest()">Places of interest</a></li>
-				<li><a style="cursor:pointer" onclick="getContactForm()">Contact</a></li>
+				<li class="header-menu-link"><a href="">Home</a></li>
+				<li class="header-menu-link"><a onclick="getPlacesOfInterest()">Places to visit</a></li>
+				<li class="header-menu-link"><a onclick="showSubmenu()" class="dropbtn">Information</a>
+				  <div id="js-dropdown" class="dropdown-content">
+					<a onclick="getToInformation('General information')">General information</a>
+					<a onclick="getToInformation('History')">History</a>
+					<a href="#C4" onclick="getToInformation('Climate')">Climate</a>
+					<a href="#C7" onclick="getToInformation('Transport')">Transport</a>
+				  
+				</div></li>
+				<li class="header-menu-link"><a onclick="getContactForm()">Contact</a></li>
 			</ul>
 			
 		</div>
 		
-		<div class="navbar-header">
+		<div class="navbar-header" id="login-link">
 		<ul class="nav navbar-nav" id="loginoutmenu">
 		</ul>
 		</div>
 
+	</div>
 	</div>
 </nav>

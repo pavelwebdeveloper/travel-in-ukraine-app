@@ -9,7 +9,11 @@ const app = express();
 const connectionString = process.env.DATABASE_URL;
 const { Pool } = require('pg')
 var myParser = require("body-parser");
-const pool = new Pool({connectionString: connectionString});
+const pool = new Pool({connectionString: connectionString,
+  ssl: {
+    rejectUnauthorized: false
+		}
+	});
 const bcrypt = require('bcrypt');
 const saltRounds = 10;
 var session = require('express-session');
@@ -27,6 +31,7 @@ app
   .set('views', path.join(__dirname, 'views'))
   .set('view engine', 'ejs')
   // index2 page
+  .get('/gotoinformation', goToInformation)
   .get('/', (req, res) => res.render('pages/index2'))
   .get('/getcontactform', getContactForm)
   .get('/getloginform', getLogInForm)
@@ -53,9 +58,18 @@ app
   //.get('/placesofinterest', (req, res) => res.render('pages/placesofinterest'))
   .get('/placesofinterest', getPlacesOfInterest)
   .get('/placeofinterestdetails', getPlaceOfInterestDetails)
+  
   .listen(PORT, () => console.log(`Listening on ${ PORT }`))
   
+  function goToInformation(req, res){
+	  console.log("Let's look at the informationKind !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+	  console.log(req.query.informationKind);
+	  //res.render('pages/add_place_of_interest_page'); 
+		res.render('pages/mainpage')	  
+  }
+  
   function getContactForm(req, res){
+	  console.log("Let's look at the informationKinda !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
 	  var infomessage = "";
 	res.render('pages/contactform', {
 		infomessage: infomessage

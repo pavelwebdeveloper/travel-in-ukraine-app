@@ -19,11 +19,74 @@
   font-family: 'Pinyon Script', cursive;
 }
 
+#flex-menu{
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+@media only screen and (min-width: 100em) {
+		#flex-menu{
+		flex-direction: row;
+	}
+}
+
+@media only screen and (min-width: 50em) {
+	#login-link{
+		margin-left: 10em;
+	}
+}
+
+
+.header-menu-link:hover{
+	background-color: #e7e7e7;
+	z-index: 1;
+}
+
+/* the beginning of the styles for togglable dropdown menu link */
+
+.dropbtn {
+  color: #777;
+  padding: 15px;
+  border: none;
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+  background-color: #f8f8f8;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f1f1f1;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+.dropbtn:hover {
+	background-color: #e7e7e7;
+}
+
+.dropdown-content a:hover {background-color: #e7e7e7;}
+
+/* Show the dropdown menu (use JS to add this class to the .dropdown-content container when the user clicks on the dropdown button) */
+.show {display:block;}
+
+/* the end of the styles for hoverable dropdown menu link */
 
 @media only screen and (min-width: 64em) {
 	a:hover {
-cursor: pointer;
-color: white;	
+cursor: pointer;	
 }
 
 button {
@@ -167,7 +230,9 @@ button {
   }
   
 	.navbar-brand {
+		position: relative;
 	  width: 100%;
+	  
   }
   
   .jumbotron p {
